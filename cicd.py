@@ -22,6 +22,10 @@ class Reader(threading.Thread):
             if (data):
                 string = bytes.decode(data, encoding)
                 print string
+                response = [{'statusCode': 200}]
+
+                jresp = json.dumps(response)
+                self.client.sendall(jresp)
 
             else:
                 break
