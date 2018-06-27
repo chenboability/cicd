@@ -5,6 +5,7 @@
 
 import threading
 import socket
+from urllib import unquote
 import json
 
 encoding = 'utf-8'
@@ -22,7 +23,7 @@ class Reader(threading.Thread):
             data = self.client.recv(BUFSIZE)
             if (data):
                 string = bytes.decode(data, encoding)
-                print string
+                print unquote(string)
                 response = [{'statusCode': 200}]
 
                 jresp = json.dumps(response)
