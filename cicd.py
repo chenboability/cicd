@@ -9,7 +9,7 @@ from urllib import unquote
 import json
 
 encoding = 'utf-8'
-BUFSIZE = 1024
+BUFSIZE = 81920
 
 
 # a read thread, read data from remote
@@ -23,7 +23,8 @@ class Reader(threading.Thread):
             data = self.client.recv(BUFSIZE)
             if (data):
                 string = bytes.decode(data, encoding)
-                print unquote(string)
+                jsonObj = json.loads(unquote(string))
+                print jsonObj.matrix.state
                 response = [{'statusCode': 200}]
 
                 jresp = json.dumps(response)
